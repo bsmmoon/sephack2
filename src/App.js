@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
 import Style from './Style';
+import Card from './Card';
 
 import Slider from "react-slick";
 
@@ -30,10 +31,12 @@ class App extends Component {
 
     this.steps = [
       {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
-      {title: 'G Form', message: 'Terms and Conditions applied', type: 'link', data: {link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true'}},
-      {title: 'Image', message: 'WOW', type: 'google-form', data: {
-        link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow',
+      {title: 'G Form', message: 'Terms and Conditions applied', type: 'google-form', data: {
+        link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true',
         api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
+      }},
+      {title: 'Image', message: 'WOW', type: 'image', data: {
+        link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow',
       }},
     ]
 
@@ -91,33 +94,7 @@ class App extends Component {
   }
 
   makeCurrentStepComponent(step) {
-    let action = '';
-    switch (step.type) {
-      case 'link':
-        action = <a href={step.data.link}>LINK</a>;
-        break;
-      case 'image':
-        action = <div style={{float: 'left'}}>
-          <img src={step.data.link} style={{'minWidth': '100%', height: 'auto'}}/>
-          {step.data.caption}
-        </div>
-      default:
-        break;
-    }
-
-    return (
-      <div>
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          <h3>{step.title}</h3>
-        </div>
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          {step.message}
-        </div>
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          {action}
-        </div>
-      </div>
-    )
+    return <Card step={step}/>
   }
 
   progress() {
