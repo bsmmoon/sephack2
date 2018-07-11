@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
+import $ from 'jquery';
 
 import Style from './Style';
 import Card from './Card';
@@ -59,6 +60,7 @@ class App extends Component {
     this.state = {
       progress: 0,
       complete: false,
+      feedback: '',
     }
   }
 
@@ -100,19 +102,44 @@ class App extends Component {
   progress() {
     let progress = this.state.progress;
     let currentStep = this.steps[progress];
+    var current_user = "yuhan.peh@luxola.com"
 
+    let self = this;
     if (currentStep.type == 'google-form') {
-      // check
-      if (false) return;
-    }
-
-    progress = this.state.progress + 1;
-    if (!(progress < this.steps.length)) {
-      this.setState({complete: true})
+      this.setState({feedback: 'checking...'})
+      $.ajax({
+        url: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
+        type : "GET",
+        dataType: 'JSON',
+        success : function (data, status, xhr) {
+          if ((data['logLines'][0]['Email Address'] === current_user) && (data['logLines'][0]['Status'] === 'Completed')) {
+            progress = self.state.progress + 1;
+            if (!(progress < self.steps.length)) {
+              self.setState({
+                complete: true,
+                feedback: '',
+              })
+            } else {
+              self.setState({
+                progress: progress,
+                feedback: '',
+              });
+            }
+            self.slider.slickGoTo(progress);
+          } else {
+            return;
+          }
+        }
+      });
     } else {
-      this.setState({progress: progress});
+      progress = this.state.progress + 1;
+      if (!(progress < this.steps.length)) {
+        this.setState({complete: true})
+      } else {
+        this.setState({progress: progress});
+      }
+      this.slider.slickGoTo(progress);
     }
-    this.slider.slickGoTo(progress);
   }
 
   progressComponent() {
@@ -146,6 +173,7 @@ class App extends Component {
           NEXT
         </button>
         <div className="col-xs-4"></div>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc])}>{this.state.feedback}</div>
       </div>
     )
 
