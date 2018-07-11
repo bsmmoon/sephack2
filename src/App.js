@@ -27,8 +27,8 @@ class App extends Component {
   headerComponent(header, subheader) {
     return (
       <div className="row">
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          <h1>{header}</h1>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {color: 'white', background: 'black'}])}>
+          <h1 style={{margin: '20px'}}>{header}</h1>
         </div>
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
           <h2>{subheader}</h2>
@@ -68,7 +68,7 @@ class App extends Component {
     const header = 'SEPHORA'
     const subheader = 'new minion guide'
     return (
-      <div className="container">
+      <div className="container" style={{width: '900px'}}>
         {this.bannerComponent(url)}
         {this.headerComponent(header, subheader)}
         {this.progressComponent()}
