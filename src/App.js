@@ -30,8 +30,8 @@ class App extends Component {
     };
 
     this.steps = [
-      {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
-      {title: 'G Form', message: 'Terms and Conditions applied', type: 'google-form', data: {
+      {title: 'Sign Up to Sephora.sg', message: 'Ask your neighbor for admin access', type: 'link', data: {link: 'https://www.sephora.sg/'}},
+      {title: 'Personal Details Survey', message: 'Your data is safe with us', type: 'google-form', data: {
         link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true',
         api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
       }},
