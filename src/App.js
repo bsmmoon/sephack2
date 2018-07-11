@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Style from './Style';
 
+import Slider from "react-slick";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -13,15 +15,38 @@ class App extends Component {
     this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
     this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
 
+    this.slideSettings = {
+      dots: false,
+      infinite: false,
+      swipe: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+
+    this.steps = [
+      {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
+      {title: 'G Form', message: 'Terms and Conditions applied', type: 'link', data: {link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true'}},
+      {title: 'Image', message: 'WOW', type: 'image', data: {link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow'}},
+    ]
+
+    this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
+      {
+        this.steps.map((step, index) => {
+          return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
+        })
+      }
+      <div>
+        <div className="col-xs-12" style={this.style.base.align.hcvc}>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
+        </div>
+        <div className="col-xs-12" style={this.style.base.align.hcvc}>
+          Thank you for completing the survey.
+        </div>
+      </div>
+    </Slider>
+
     this.state = {
-      steps: [
-        {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
-        {title: 'G Form', message: 'Terms and Conditions applied', type: 'link', data: {link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true'}},
-        {title: 'Image', message: 'WOW', type: 'image', data: [
-          {link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow'},
-          {link: 'https://t3.rbxcdn.com/abab9c91475ebf5a6c172a77e4e24708', caption: 'reverse of wow is wow'}
-        ]},
-      ],
       progress: 0,
       complete: false,
     }
@@ -58,25 +83,20 @@ class App extends Component {
     )
   }
 
-  makeCurrentStepComponent() {
-    let step = this.state.steps[this.state.progress]
+  makeCurrentStepComponent(step) {
     let action = '';
     switch (step.type) {
       case 'link':
         action = <a href={step.data.link}>LINK</a>;
         break;
       case 'image':
-        action = step.data.map((image, index) => {
-          return <div key={index}>
-            <img src={image.link}/>
-            {image.caption}
-          </div>
-        });
+        action = <div style={{float: 'left'}}>
+          <img src={step.data.link} style={{'minWidth': '100%', height: 'auto'}}/>
+          {step.data.caption}
+        </div>
       default:
         break;
     }
-
-    console.log(action)
 
     return (
       <div>
@@ -95,16 +115,17 @@ class App extends Component {
 
   progress() {
     let progress = this.state.progress + 1;
-    if (!(progress < this.state.steps.length)) {
+    if (!(progress < this.steps.length)) {
       this.setState({complete: true})
     } else {
       this.setState({progress: progress});
     }
+    this.slider.slickGoTo(progress);
   }
 
   progressComponent() {
     let progress = [];
-    for (let i = 0; i < this.state.steps.length; i++) {
+    for (let i = 0; i < this.steps.length; i++) {
       if (i <= this.state.progress) {
         progress.push(<span key={`${i}-bar`}>{this.bar}</span>)
         progress.push(<span key={`${i}-circle`}>{this.full}</span>)
@@ -144,7 +165,6 @@ class App extends Component {
           </div>
         </div>
         {this.state.complete ? '' : nextButton}
-        {this.state.complete ? '' : this.makeCurrentStepComponent()}
       </div>
     )
   }
@@ -167,12 +187,13 @@ class App extends Component {
     const url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
     const header = 'SEPHORA'
     const subheader = 'new minion guide'
+
     return (
       <div className="container" style={{width: '900px', fontFamily: '"Avalon", CenturyGothic, Helvetica, Arial'}}>
         {this.bannerComponent(url)}
         {this.headerComponent(header, subheader)}
         {this.progressComponent()}
-        {this.state.complete ? this.completeComponent() : ''}
+        {this.stepDisplay}
       </div>
     )
   }
