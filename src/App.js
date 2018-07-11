@@ -58,8 +58,8 @@ class App extends Component {
       </Slider>
     } else {
       this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
-      this.header = 'WELCOME'
-      this.subheader = 'new hire guide'
+      this.header = 'New Hire Guide'
+      this.subheader = 'welcome'
 
       this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
       this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
@@ -80,6 +80,7 @@ class App extends Component {
           link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true',
           api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
         }},
+        {title: 'Freshdesk', message: 'Ask your neighbor for access', type: 'link', data: {link: 'https://luxola.freshdesk.com/helpdesk'}},
         {title: 'How to create an admin account', message: 'Step by step guide', type: 'link', data: {link: '?id=2'}},
       ]
 
