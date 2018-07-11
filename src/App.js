@@ -11,6 +11,10 @@ class App extends Component {
     
     this.style = Style.import();
 
+    this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
+    this.header = 'WELCOME'
+    this.subheader = 'new minion guide'
+
     this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
     this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
     this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
@@ -37,7 +41,7 @@ class App extends Component {
         })
       }
       <div>
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
         </div>
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
@@ -52,17 +56,17 @@ class App extends Component {
     }
   }
 
-  bannerComponent(url) {
+  bannerComponent() {
     return (
       <div className="row">
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          <img src={url}/>
+          <img src={this.url}/>
         </div>
       </div>
     )
   }
 
-  headerComponent(header, subheader) {
+  headerComponent() {
     return (
       <div className="row">
         <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc,
@@ -74,10 +78,10 @@ class App extends Component {
             'fontSize': '24px',
             'lineHeight': '26px',
           }])}>
-          <h1 style={{margin: '20px 0px 10px 0px'}}>{header}</h1>
+          <h1 style={{margin: '20px 0px 10px 0px'}}>{this.header}</h1>
         </div>
         <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {color: 'white', background: 'black'}])}>
-        <p style={{margin: '10px 0px 20px 0px'}}>{subheader}</p>
+        <p style={{margin: '10px 0px 20px 0px'}}>{this.subheader}</p>
         </div>
       </div>
     )
@@ -148,9 +152,9 @@ class App extends Component {
             border: '0px',
             padding: '5px',
             'color': '#fff',
-            'backgroundColor': '#d50032',
+            'backgroundColor': this.state.complete ? 'lightgrey' : '#d50032',
             'borderColor': '#d50032',
-          }])} onClick={this.progress.bind(this)}>
+          }])} onClick={this.state.complete ? () => {} : this.progress.bind(this)}>
           NEXT
         </button>
         <div className="col-xs-4"></div>
@@ -164,7 +168,7 @@ class App extends Component {
             {progress}
           </div>
         </div>
-        {this.state.complete ? '' : nextButton}
+        {nextButton}
       </div>
     )
   }
@@ -184,16 +188,12 @@ class App extends Component {
 
   render () {
     console.log(this.state)
-    const url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
-    const header = 'SEPHORA'
-    const subheader = 'new minion guide'
-
     return (
       <div className="container" style={{width: '900px', fontFamily: '"Avalon", CenturyGothic, Helvetica, Arial'}}>
-        {this.bannerComponent(url)}
-        {this.headerComponent(header, subheader)}
-        {this.progressComponent()}
+        {this.bannerComponent()}
+        {this.headerComponent()}
         {this.stepDisplay}
+        {this.progressComponent()}
       </div>
     )
   }
