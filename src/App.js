@@ -9,15 +9,18 @@ class App extends Component {
     
     this.style = Style.import();
 
-    this.bar = <i className="fas fa-minus" style={{'fontSize': '45px'}}></i>
-    this.empty = <i className="far fa-circle" style={{'fontSize': '30px'}}></i>
-    this.full = <i className="fas fa-circle" style={{'fontSize': '30px'}}></i>
+    this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
+    this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
+    this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
 
     this.state = {
       steps: [
         {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
         {title: 'G Form', message: 'Terms and Conditions applied', type: 'link', data: {link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true'}},
-        {title: 'Image', message: 'WOW', type: 'image', data: {link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg'}},
+        {title: 'Image', message: 'WOW', type: 'image', data: [
+          {link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow'},
+          {link: 'https://t3.rbxcdn.com/abab9c91475ebf5a6c172a77e4e24708', caption: 'reverse of wow is wow'}
+        ]},
       ],
       progress: 0,
       complete: false,
@@ -41,10 +44,10 @@ class App extends Component {
           {
             color: 'white',
             background: 'black',
-            'font-weight': '700',
-            'letter-spacing': '0.5px',
-            'font-size': '24px',
-            'line-height': '26px',
+            'fontWeight': '700',
+            'letterSpacing': '0.5px',
+            'fontSize': '24px',
+            'lineHeight': '26px',
           }])}>
           <h1 style={{margin: '20px 0px 10px 0px'}}>{header}</h1>
         </div>
@@ -63,10 +66,18 @@ class App extends Component {
         action = <a href={step.data.link}>LINK</a>;
         break;
       case 'image':
-        action = <img src={step.data.link}/>
+        action = step.data.map((image, index) => {
+          return <div key={index}>
+            <img src={image.link}/>
+            {image.caption}
+          </div>
+        });
       default:
         break;
     }
+
+    console.log(action)
+
     return (
       <div>
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
@@ -98,16 +109,33 @@ class App extends Component {
         progress.push(<span key={`${i}-bar`}>{this.bar}</span>)
         progress.push(<span key={`${i}-circle`}>{this.full}</span>)
       } else {
-        progress.push(<span key={`${i}-bar`} style={{color: 'grey'}}>{this.bar}</span>)
-        progress.push(<span key={`${i}-circle`} style={{color: 'grey'}}>{this.empty}</span>)
+        progress.push(<span key={`${i}-bar`} style={{color: 'lightgrey'}}>{this.bar}</span>)
+        progress.push(<span key={`${i}-circle`} style={{color: 'lightgrey'}}>{this.empty}</span>)
       }
     }
     if (this.state.complete) {
       progress.push(<span key='end-bar'>{this.bar}</span>)
     } else {
-      progress.push(<span key='end-bar' style={{color: 'grey'}}>{this.bar}</span>)      
+      progress.push(<span key='end-bar' style={{color: 'lightgrey'}}>{this.bar}</span>)      
     }
     
+    let nextButton = (
+      <div>
+        <div className="col-xs-4"></div>
+        <button className="col-xs-4" style={Style.merge([this.style.base.align.hcvc,
+          {
+            border: '0px',
+            padding: '5px',
+            'color': '#fff',
+            'backgroundColor': '#d50032',
+            'borderColor': '#d50032',
+          }])} onClick={this.progress.bind(this)}>
+          NEXT
+        </button>
+        <div className="col-xs-4"></div>
+      </div>
+    )
+
     return (
       <div className="row">
         <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
@@ -115,19 +143,8 @@ class App extends Component {
             {progress}
           </div>
         </div>
-        <div className="col-xs-4"></div>
-        <button className="col-xs-4" style={Style.merge([this.style.base.align.hcvc,
-          {
-            border: '0px',
-            padding: '5px',
-            'color': '#fff',
-            'background-color': '#d50032',
-            'border-color': '#d50032',
-          }])} onClick={this.progress.bind(this)}>
-          NEXT
-        </button>
-        <div className="col-xs-4"></div>
-        {this.makeCurrentStepComponent()}
+        {this.state.complete ? '' : nextButton}
+        {this.state.complete ? '' : this.makeCurrentStepComponent()}
       </div>
     )
   }
@@ -135,7 +152,7 @@ class App extends Component {
   completeComponent() {
     return (
       <div className="row">
-        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
+        <div className="col-xs-12" style={this.style.base.align.hcvc}>
           <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
         </div>
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
@@ -154,7 +171,8 @@ class App extends Component {
       <div className="container" style={{width: '900px', fontFamily: '"Avalon", CenturyGothic, Helvetica, Arial'}}>
         {this.bannerComponent(url)}
         {this.headerComponent(header, subheader)}
-        {this.state.complete ? this.completeComponent() : this.progressComponent()}
+        {this.progressComponent()}
+        {this.state.complete ? this.completeComponent() : ''}
       </div>
     )
   }
