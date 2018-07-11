@@ -9,7 +9,12 @@ class App extends Component {
     
     this.style = Style.import();
 
+    this.bar = <i className="fas fa-minus" style={{'fontSize': '45px'}}></i>
+    this.empty = <i className="far fa-circle" style={{'fontSize': '30px'}}></i>
+    this.full = <i className="fas fa-circle" style={{'fontSize': '30px'}}></i>
+
     this.state = {
+      total: 3,
       progress: 0,
     }
   }
@@ -38,11 +43,21 @@ class App extends Component {
   }
 
   progressComponent() {
-    let progressBar = '';
+    let progress = [];
+    for (let i = 0; i < this.state.total; i++) {
+      progress.push(<span key={`${i}-bar`}>{this.bar}</span>)
+      if (i <= this.state.progress) {
+        progress.push(<span key={`${i}-circle`}>{this.full}</span>)
+      } else {
+        progress.push(<span key={`${i}-circle`}>{this.empty}</span>)
+      }
+    }
+    progress.push(<span key='end-bar'>{this.bar}</span>)
+    
     return (
       <div className="row">
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          ----------O----------O----------O----------
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc])}>
+          {progress}
         </div>
         <div className="col-xs-12" style={this.style.base.align.hcvc}>
           STEP {this.state.progress + 1}
