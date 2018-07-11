@@ -13,55 +13,108 @@ class App extends Component {
     
     this.style = Style.import();
 
-    this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
-    this.header = 'WELCOME'
-    this.subheader = 'new minion guide'
+    const id = this.getParameterByName('id', window.location);
+    if (id == 2) {
+      this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
+      this.header = 'WELCOME'
+      this.subheader = 'new minion guide'
 
-    this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
-    this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
-    this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
+      this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
+      this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
+      this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
 
-    this.slideSettings = {
-      dots: false,
-      infinite: false,
-      swipe: false,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1
-    };
+      this.slideSettings = {
+        dots: false,
+        infinite: false,
+        swipe: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
 
-    this.steps = [
-      {title: 'Sign Up to Sephora.sg', message: 'Ask your neighbor for admin access', type: 'link', data: {link: 'https://www.sephora.sg/'}},
-      {title: 'Personal Details Survey', message: 'Your data is safe with us', type: 'google-form', data: {
-        link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true',
-        api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
-      }},
-      {title: 'Image', message: 'WOW', type: 'image', data: {
-        link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow',
-      }},
-    ]
+      this.steps = [
+        {title: 'Step 1', message: 'Select register on the top left corner and click ‘I’M NEW TO SEPHORA’', type: 'image', data: {
+          link: 'https://i.imgur.com/Te5DsXA.png', caption: '',
+        }},
+        {title: 'Step 2', message: 'Input your details and your staff email address accordingly and continue.', type: 'image', data: {
+          link: 'https://i.imgur.com/LmGgCng.png', caption: '',
+        }},
+      ]
 
-    this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
-      {
-        this.steps.map((step, index) => {
-          return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
-        })
-      }
-      <div>
-        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
+      this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
+        {
+          this.steps.map((step, index) => {
+            return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
+          })
+        }
+        <div>
+          <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
+          </div>
+          <div className="col-xs-12" style={this.style.base.align.hcvc}>
+            Thank you for completing the survey.
+          </div>
         </div>
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          Thank you for completing the survey.
+      </Slider>
+    } else {
+      this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
+      this.header = 'WELCOME'
+      this.subheader = 'new minion guide'
+
+      this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
+      this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
+      this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
+
+      this.slideSettings = {
+        dots: false,
+        infinite: false,
+        swipe: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+      };
+
+      this.steps = [
+        {title: 'Sign Up to Sephora.sg', message: 'Ask your neighbor for admin access', type: 'link', data: {link: 'https://www.sephora.sg/'}},
+        {title: 'Personal Details Survey', message: 'Your data is safe with us', type: 'google-form', data: {
+          link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true',
+          api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
+        }},
+        {title: 'How to create an admin account', message: 'Step by step guide', type: 'link', data: {link: '?id=2'}},
+      ]
+
+      this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
+        {
+          this.steps.map((step, index) => {
+            return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
+          })
+        }
+        <div>
+          <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
+          </div>
+          <div className="col-xs-12" style={this.style.base.align.hcvc}>
+            Thank you for completing the survey.
+          </div>
         </div>
-      </div>
-    </Slider>
+      </Slider>
+    }
 
     this.state = {
       progress: 0,
       complete: false,
       feedback: '',
     }
+  }
+
+  getParameterByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, '\\$&');
+    var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, ' '));
   }
 
   bannerComponent() {

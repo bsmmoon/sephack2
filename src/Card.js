@@ -9,6 +9,8 @@ class Card extends Component {
     console.log(step)
     let action = '';
     switch (step.type) {
+      case 'text':
+        break;
       case 'link':
         action = <div className="col-xs-12" style={Style.merge([style.base.align.hc, style.base.align.vb, {height: '100%'}])}>
           <button onClick={()=>{window.open(step.data.link,'_blank')}} style={
@@ -45,7 +47,7 @@ class Card extends Component {
         action = <div className="col-xs-12">
           <div style={Style.merge([{maxHeight: '300px'}])}>
             <div style={Style.merge([style.base.align.hcvc])}>
-              <img src={step.data.link} style={{'maxWidth': '100%'}}/>
+              <img src={step.data.link} style={{'maxWidth': '100%'}} onClick={()=>{window.open(step.data.link,'_blank')}}/>
             </div>
             <div style={
               Style.merge([style.base.align.hcvc,
@@ -82,7 +84,7 @@ class Card extends Component {
             'borderRadius': '.25rem',
             'margin': '12px',
             'width': '480px',
-            'height': '360px',
+            'height': '370px',
           },
         ])}>
           <div className="col-xs-12" style={Style.merge([style.base.align.hcvc,])}>
