@@ -31,7 +31,10 @@ class App extends Component {
     this.steps = [
       {title: 'Simple Link', message: 'Welcome', type: 'link', data: {link: 'https://www.sephora.sg/'}},
       {title: 'G Form', message: 'Terms and Conditions applied', type: 'link', data: {link: 'https://docs.google.com/forms/d/e/1FAIpQLSczb52p39n4xvaEFFkKBcF9AJ63m0B5TbkCLDSnRdWPCP5BUQ/viewform?embedded=true'}},
-      {title: 'Image', message: 'WOW', type: 'image', data: {link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow'}},
+      {title: 'Image', message: 'WOW', type: 'google-form', data: {
+        link: 'https://i.kym-cdn.com/entries/icons/mobile/000/013/564/doge.jpg', caption: 'wow',
+        api: 'https://script.google.com/macros/s/AKfycbwrXYiq_0bLfdfePko1TfWrB4m5D70KTU3XIuX3MuXeCyfrS7o/exec',
+      }},
     ]
 
     this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
@@ -118,7 +121,15 @@ class App extends Component {
   }
 
   progress() {
-    let progress = this.state.progress + 1;
+    let progress = this.state.progress;
+    let currentStep = this.steps[progress];
+
+    if (currentStep.type == 'google-form') {
+      // check
+      if (false) return;
+    }
+
+    progress = this.state.progress + 1;
     if (!(progress < this.steps.length)) {
       this.setState({complete: true})
     } else {
