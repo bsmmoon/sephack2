@@ -16,8 +16,8 @@ class App extends Component {
     const id = this.getParameterByName('id', window.location);
     if (id == 2) {
       this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
-      this.header = 'WELCOME'
-      this.subheader = 'new minion guide'
+      this.header = 'Admin Account Creation'
+      this.subheader = 'step by step'
 
       this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
       this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
@@ -59,7 +59,7 @@ class App extends Component {
     } else {
       this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
       this.header = 'WELCOME'
-      this.subheader = 'new minion guide'
+      this.subheader = 'new hire guide'
 
       this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
       this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
