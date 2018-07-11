@@ -13,24 +13,26 @@ class App extends Component {
     
     this.style = Style.import();
 
+    this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
+    this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
+    this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
+
+    this.slideSettings = {
+      dots: false,
+      infinite: false,
+      swipe: false,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1
+    };
+    
     const id = this.getParameterByName('id', window.location);
     if (id == 2) {
-      this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
+      this.banner = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
       this.header = 'Admin Account Creation'
       this.subheader = 'step by step'
-
-      this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
-      this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
-      this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
-
-      this.slideSettings = {
-        dots: false,
-        infinite: false,
-        swipe: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
+      this.headerColor = 'white'
+      this.headerBackground = 'black'
 
       this.steps = [
         {title: 'Step 1', message: 'Select register on the top left corner and click ‘I’M NEW TO SEPHORA’', type: 'image', data: {
@@ -40,39 +42,33 @@ class App extends Component {
           link: 'https://i.imgur.com/LmGgCng.png', caption: '',
         }},
       ]
+    } else if (id == 3) {
+      this.banner = 'https://i.imgur.com/ScAasNC.png';
+      this.header = 'How to Make Omelette'
+      this.subheader = 'for the hungry souls'
+      this.headerColor = 'black'
+      this.headerBackground = '#FFE4B5'
 
-      this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
-        {
-          this.steps.map((step, index) => {
-            return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
-          })
-        }
-        <div>
-          <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
-          </div>
-          <div className="col-xs-12" style={this.style.base.align.hcvc}>
-            Thank you for completing the survey.
-          </div>
-        </div>
-      </Slider>
+      this.steps = [
+        {title: 'Step 1', message: 'BEAT eggs, water, salt and pepper in small bowl until blended.', type: 'image', data: {
+          link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-1-2-120x120.jpg', caption: '',
+        }},
+        {title: 'Step 2', message: 'HEAT butter in 7 to 10-inch nonstick omelet pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges.', type: 'image', data: {
+          link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-2-3-120x120.jpg', caption: '',
+        }},
+        {title: 'Step 3', message: 'GENTLY PUSH cooked portions from edges toward the center with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed.', type: 'image', data: {
+          link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-3-3-120x120.jpg', caption: '',
+        }},
+        {title: 'Step 4', message: 'When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelet. FOLD omelet in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelet onto plate. SERVE immediately.', type: 'image', data: {
+          link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-4-120x120.jpg', caption: '',
+        }},
+      ]
     } else {
-      this.url = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
+      this.banner = 'http://u-wantitblog.com/wp-content/uploads/2017/03/sephora-header.jpg';
       this.header = 'New Hire Guide'
       this.subheader = 'welcome'
-
-      this.bar = <i className="fas fa-minus" style={{'fontSize': '45px', padding: '2px'}}></i>
-      this.empty = <i className="far fa-circle" style={{'fontSize': '30px', padding: '2px'}}></i>
-      this.full = <i className="fas fa-circle" style={{'fontSize': '30px', padding: '2px', color: 'red'}}></i>
-
-      this.slideSettings = {
-        dots: false,
-        infinite: false,
-        swipe: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1
-      };
+      this.headerColor = 'white'
+      this.headerBackground = 'black'
 
       this.steps = [
         {title: 'Sign Up to Sephora.sg', message: 'Ask your neighbor for admin access', type: 'link', data: {link: 'https://www.sephora.sg/'}},
@@ -83,23 +79,23 @@ class App extends Component {
         {title: 'Freshdesk', message: 'Ask your neighbor for access', type: 'link', data: {link: 'https://luxola.freshdesk.com/helpdesk'}},
         {title: 'How to create an admin account', message: 'Step by step guide', type: 'link', data: {link: '?id=2'}},
       ]
-
-      this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
-        {
-          this.steps.map((step, index) => {
-            return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
-          })
-        }
-        <div>
-          <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
-          </div>
-          <div className="col-xs-12" style={this.style.base.align.hcvc}>
-            Thank you for completing the survey.
-          </div>
-        </div>
-      </Slider>
     }
+
+    this.stepDisplay = <Slider ref={slider => (this.slider = slider)} {...this.slideSettings}>
+      {
+        this.steps.map((step, index) => {
+          return <div key={index}>{this.makeCurrentStepComponent(step)}</div>;
+        })
+      }
+      <div>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {padding: '20px'}])}>
+          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwzrgO9g90pZIK4vHItL08PILDUATpj16B328szTdFGGBNzuLN"/>
+        </div>
+        <div className="col-xs-12" style={this.style.base.align.hcvc}>
+          Thank you for completing the survey.
+        </div>
+      </div>
+    </Slider>
 
     this.state = {
       progress: 0,
@@ -121,8 +117,8 @@ class App extends Component {
   bannerComponent() {
     return (
       <div className="row">
-        <div className="col-xs-12" style={this.style.base.align.hcvc}>
-          <img src={this.url}/>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc])}>
+          <img src={this.banner} style={{maxWidth: '100%'}}/>
         </div>
       </div>
     )
@@ -133,8 +129,8 @@ class App extends Component {
       <div className="row">
         <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc,
           {
-            color: 'white',
-            background: 'black',
+            color: this.headerColor,
+            background: this.headerBackground,
             'fontWeight': '700',
             'letterSpacing': '0.5px',
             'fontSize': '24px',
@@ -142,7 +138,10 @@ class App extends Component {
           }])}>
           <h1 style={{margin: '20px 0px 10px 0px'}}>{this.header}</h1>
         </div>
-        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {color: 'white', background: 'black'}])}>
+        <div className="col-xs-12" style={Style.merge([this.style.base.align.hcvc, {
+          color: this.headerColor,
+          background: this.headerBackground,
+        }])}>
         <p style={{margin: '10px 0px 20px 0px'}}>{this.subheader}</p>
         </div>
       </div>
