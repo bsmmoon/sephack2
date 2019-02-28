@@ -42,7 +42,8 @@ class App extends Component {
             type: 'image', 
             message: 'Select register on the top left corner and click ‘I’M NEW TO SEPHORA’',
             data: {
-              link: 'https://i.imgur.com/Te5DsXA.png', caption: '',
+              link: 'https://i.imgur.com/Te5DsXA.png',
+              caption: '',
             }
           },
           {
@@ -50,7 +51,8 @@ class App extends Component {
             type: 'image', 
             message: 'Input your details and your staff email address accordingly and continue.',
             data: {
-              link: 'https://i.imgur.com/LmGgCng.png', caption: '',
+              link: 'https://i.imgur.com/LmGgCng.png',
+              caption: '',
             }
           },
         ]
@@ -68,7 +70,8 @@ class App extends Component {
             type: 'image',
             message: 'BEAT eggs, water, salt and pepper in small bowl until blended.',
             data: {
-              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-1-2-120x120.jpg', caption: '',
+              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-1-2-120x120.jpg',
+              caption: '',
             }
           },
           {
@@ -76,7 +79,8 @@ class App extends Component {
             type: 'image',
             message: 'HEAT butter in 7 to 10-inch nonstick omelet pan or skillet over medium-high heat until hot. TILT pan to coat bottom. POUR IN egg mixture. Mixture should set immediately at edges.',
             data: {
-              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-2-3-120x120.jpg', caption: '',
+              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-2-3-120x120.jpg',
+              caption: '',
             }
           },
           {
@@ -84,7 +88,8 @@ class App extends Component {
             type: 'image',
             message: 'GENTLY PUSH cooked portions from edges toward the center with inverted turner so that uncooked eggs can reach the hot pan surface. CONTINUE cooking, tilting pan and gently moving cooked portions as needed.',
             data: {
-              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-3-3-120x120.jpg', caption: '',
+              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-3-3-120x120.jpg',
+              caption: '',
             }
           },
           {
@@ -92,7 +97,8 @@ class App extends Component {
             type: 'image',
             message: 'When top surface of eggs is thickened and no visible liquid egg remains, PLACE filling on one side of the omelet. FOLD omelet in half with turner. With a quick flip of the wrist, turn pan and INVERT or SLIDE omelet onto plate. SERVE immediately.',
             data: {
-              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-4-120x120.jpg', caption: '',
+              link: 'https://x9wsr1khhgk5pxnq1f1r8kye-wpengine.netdna-ssl.com/wp-content/uploads/Step-4-120x120.jpg',
+              caption: '',
             }
           },
         ]
